@@ -1,4 +1,4 @@
-import { useState, Fragment, useEffect, useRef, useCallback } from "react"
+import { useState, Fragment, useEffect, useCallback } from "react"
 import styled, { keyframes, css } from "styled-components"
 import { createGlobalStyle } from "styled-components"
 import { flipInY } from "react-animations"
