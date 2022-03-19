@@ -265,7 +265,9 @@ const isWordInDictionary = async word => {
 }
 
 function App() {
-  const [wordOftheDay] = useState(WORD_OF_THE_DAY)
+  const [wordOftheDay] = useState(
+    WORD_OF_THE_DAY[Math.ceil(Math.random() * 10) - 1]
+  )
   const [boardState, setBoardState] = useState([INIT_BOARD_STATE])
   const [currentBoardState, setCurrentBoardState] = useState(INIT_BOARD_STATE)
   const [currentMove, setCurrentMove] = useState(1)
