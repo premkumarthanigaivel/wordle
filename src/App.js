@@ -151,7 +151,7 @@ const Key = styled.div`
 
 const ToastContent = styled.div`
   border-radius: 3px;
-  padding: 10px;
+  padding: 12px;
   background-color: white;
   strong {
     font-size: 13px;
@@ -161,7 +161,7 @@ const ToastContent = styled.div`
 const KEYBOARD_ALPHABETS = {
   LINE_ONE: ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   LINE_TWO: ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-  LINE_THREE: ["X", "C", "V", "B", "N", "M"],
+  LINE_THREE: ["Z", "X", "C", "V", "B", "N", "M"],
 }
 
 const WORD_OF_THE_DAY = [
@@ -265,9 +265,7 @@ const isWordInDictionary = async word => {
 }
 
 function App() {
-  const [wordOftheDay] = useState(
-    WORD_OF_THE_DAY[Math.ceil(Math.random() * 10) - 1]
-  )
+  const [wordOftheDay] = useState(WORD_OF_THE_DAY)
   const [boardState, setBoardState] = useState([INIT_BOARD_STATE])
   const [currentBoardState, setCurrentBoardState] = useState(INIT_BOARD_STATE)
   const [currentMove, setCurrentMove] = useState(1)
@@ -464,7 +462,7 @@ function App() {
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") return
-    setAlert({ display: false, msg: "" })
+    setAlert({ displasy: false, msg: "" })
   }
 
   return (
@@ -472,24 +470,28 @@ function App() {
       <GlobalCSS />
       <Page>
         {gameOver?.won && (
-          <Confetti numberOfPieces={500} width="1440" height="1000" />
+          <Confetti
+            numberOfPieces={500}
+            width={window.innerWidth}
+            height={window.innerHeight}
+          />
         )}
         {renderHeader()}
         {/* <Switch defaultChecked color="default" /> */}
         {/* <Button variant="contained">NEW GAME</Button> */}
         {renderWordleBoard()}
         {renderKeyboard()}
+        <Snackbar
+          open={alert?.display}
+          autoHideDuration={3000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <ToastContent>
+            <strong>{alert?.msg}</strong>
+          </ToastContent>
+        </Snackbar>
       </Page>
-      <Snackbar
-        open={alert?.display}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <ToastContent>
-          <strong>{alert?.msg}</strong>
-        </ToastContent>
-      </Snackbar>
     </Fragment>
   )
 }
