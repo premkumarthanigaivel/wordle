@@ -5,13 +5,6 @@ import { flipInY } from "react-animations"
 import Confetti from "react-confetti"
 import Snackbar from "@mui/material/Snackbar"
 import * as React from "react"
-// import Switch from "@mui/material/Switch"
-// import Button from "@mui/material/Button"
-
-/* TODO: 
-DARK MODE
-RESET GAME
-  */
 
 const flipSquareAnimation = keyframes`${flipInY}`
 
@@ -176,74 +169,21 @@ const WORD_OF_THE_DAY = [
   "WORTH",
   "FAITH",
 ]
+
+const initSquare = () => ({
+  text: "",
+  wrongPos: false,
+  correctPos: false,
+  absent: false,
+})
+
 const INIT_BOARD_STATE = [
-  Array.of(
-    {
-      text: "",
-      wrongPos: false,
-      correctPos: false,
-      absent: false,
-    },
-    {
-      text: "",
-      wrongPos: false,
-      correctPos: false,
-      absent: false,
-    },
-    {
-      text: "",
-      wrongPos: false,
-      correctPos: false,
-      absent: false,
-    },
-    {
-      text: "",
-      wrongPos: false,
-      correctPos: false,
-      absent: false,
-    },
-    {
-      text: "",
-      wrongPos: false,
-      correctPos: false,
-      absent: false,
-    }
-  ),
-  Array.of(
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false }
-  ),
-  Array.of(
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false }
-  ),
-  Array.of(
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false }
-  ),
-  Array.of(
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false }
-  ),
-  Array.of(
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false },
-    { text: "", wrongPos: false, correctPos: false, absent: false }
-  ),
+  Array.of("", "", "", "", "").map(initSquare),
+  Array.of("", "", "", "", "").map(initSquare),
+  Array.of("", "", "", "", "").map(initSquare),
+  Array.of("", "", "", "", "").map(initSquare),
+  Array.of("", "", "", "", "").map(initSquare),
+  Array.of("", "", "", "", "").map(initSquare),
 ]
 
 const GAME_WON_MESSAGES = [
@@ -469,18 +409,16 @@ function App() {
 
   return (
     <Fragment>
-      <GlobalCSS />
       <Page>
+        <GlobalCSS />
         {gameOver?.won && (
           <Confetti
-            numberOfPieces={500}
+            numberOfPieces={200}
             width={window.innerWidth}
             height={window.innerHeight}
           />
         )}
         {renderHeader()}
-        {/* <Switch defaultChecked color="default" /> */}
-        {/* <Button variant="contained">NEW GAME</Button> */}
         {renderWordleBoard()}
         {renderKeyboard()}
         <Snackbar
