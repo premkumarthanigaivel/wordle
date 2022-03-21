@@ -7,7 +7,7 @@ _Component Framework:_ Material UI
 
 ### Features to be developed:
 
-Dark Mode
+Dark Mode: Square Colors to be lighter
 Reset Game
 
 ### Known bugs:
