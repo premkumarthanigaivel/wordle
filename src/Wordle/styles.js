@@ -1,8 +1,9 @@
 import styled from "styled-components"
 import { createGlobalStyle, keyframes, css } from "styled-components"
-import { flipInY } from "react-animations"
+import { flipInY, rubberBand } from "react-animations"
 
-export const flipSquareAnimation = keyframes`${flipInY}`
+const flipSquareAnimation = keyframes`${flipInY}`
+const RubberBandAnimation = keyframes`${rubberBand}`
 
 export const GlobalCSS = createGlobalStyle`
 * {
@@ -39,6 +40,11 @@ export const Title = styled.div`
   font-size: 40px;
   font-weight: bolder;
   text-align: center;
+  ${props =>
+    props.animation &&
+    css`
+      animation: 3s ${RubberBandAnimation};
+    `}
 `
 
 export const Page = styled.div`

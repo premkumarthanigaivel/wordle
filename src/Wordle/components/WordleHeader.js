@@ -1,10 +1,10 @@
 import React from "react"
 import { Header, Title } from "../styles"
 
-const WordleHeader = () => {
+const WordleHeader = ({ loading }) => {
   return (
     <Header>
-      <Title>WORDLE</Title>
+      <Title animation={loading}>WORDLE</Title>
     </Header>
   )
 }
