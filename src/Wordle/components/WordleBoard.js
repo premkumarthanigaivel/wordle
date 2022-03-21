@@ -1,7 +1,7 @@
 import React from "react"
 import { Board, Square } from "../styles"
 
-const WordleBoard = ({ currentBoardState }) => {
+const WordleBoard = ({ currentBoardState, darkMode }) => {
   const renderSquare = () => {
     let squareBoard = []
     currentBoardState.forEach(item =>
@@ -11,6 +11,7 @@ const WordleBoard = ({ currentBoardState }) => {
       if (typeof letter === "object")
         return (
           <Square
+            darkMode={darkMode}
             key={`${letter.text}_${idx}`}
             wrongPosition={letter.wrongPos}
             correctPosition={letter.correctPos}

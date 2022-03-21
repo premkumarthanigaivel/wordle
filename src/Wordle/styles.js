@@ -20,6 +20,9 @@ export const GlobalCSS = createGlobalStyle`
   --color-tone-2: #818384;
   --color-tone-3: #565758;
   --color-tone-4: #3a3a3c;
+  --color-tone-5: #edeff1;
+  --color-tone-6: #f6f7f8;
+  --color-tone-7: #ffffff;
   --darkendYellow: #b59f3b;
   --darkendGreen: #538d4e;
   --color-correct: var(--darkendGreen);
@@ -27,16 +30,20 @@ export const GlobalCSS = createGlobalStyle`
   --color-present: var(--darkendYellow);
   --key-bg: var(--color-tone-2);
   --key-text-color: var(--color-tone-1);
+
 }
 `
 
 export const Header = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid var(--color-tone-4);
   width: 100%;
 `
 
 export const Title = styled.div`
-  color: white;
+  color: ${props => (props.darkMode ? "var(--color-tone-7)" : "var(--black)")};
   font-size: 40px;
   font-weight: bolder;
   text-align: center;
@@ -53,7 +60,9 @@ export const Page = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  background-color: var(--black);
+  background-color: ${props =>
+    props.darkMode ? "var(--black)" : "var(--color-tone-7)"};
+  transition: all 0.4s ease-in-out;
 `
 
 export const Board = styled.div`
@@ -69,14 +78,14 @@ const getSquareBGColor = props => {
   if (props?.correctPosition) return "var(--color-correct)"
   else if (props?.wrongPosition) return "var(--color-present)"
   else if (props?.absent) return "var(--color-absent)"
-  return "var(--black)"
+  return props.darkMode ? "var(--black)" : "white"
 }
 
 const getSquareBorderColor = props => {
   if (props?.correctPosition) return "var(--color-correct)"
   else if (props?.wrongPosition) return "var(--color-present)"
   else if (props?.absent) return "var(--color-absent)"
-  return "var(--color-tone-3)"
+  return props.darkMode ? "var(--color-tone-4)" : "#d3d6da"
 }
 
 export const Square = styled.div`
@@ -85,7 +94,8 @@ export const Square = styled.div`
   font-size: 32px;
   background-color: ${props => getSquareBGColor(props)};
   border: 2px solid ${props => getSquareBorderColor(props)};
-  color: white;
+  border-radius: 3px;
+  color: ${props => (props?.darkMode ? "white" : "black")};
   font-weight: 700;
 
   display: flex;
@@ -121,13 +131,13 @@ export const Row = styled.div`
 `
 export const Key = styled.div`
   font-size: 12px;
-  padding: 14px;
+  width: ${props => (props?.actionKey ? "65px" : "43px")};
   height: 58px;
-  background-color: var(--key-bg);
+  background-color: ${props => (props?.darkMode ? "#818384" : "#d3d6da")};
   cursor: pointer;
   user-select: none;
   border-radius: 4px;
-  color: var(--key-text-color);
+  color: ${props => (props?.darkMode ? "white" : "black")};
   font-weight: 700;
 
   display: flex;
@@ -138,14 +148,15 @@ export const Key = styled.div`
 
   @media (max-width: 600px) {
     font-size: 11px;
-    padding: 10px;
+    width: ${props => (props?.actionKey ? "48px" : "30px")};
   }
 `
 
 export const ToastContent = styled.div`
   border-radius: 3px;
   padding: 12px;
-  background-color: white;
+  background-color: ${props => (props?.darkMode ? "white" : "#787c7e")};
+  color: ${props => (props?.darkMode ? "black" : "white")};
   strong {
     font-size: 13px;
   }

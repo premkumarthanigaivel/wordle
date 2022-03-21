@@ -19,6 +19,7 @@ const Wordle = () => {
   const [gameOver, setGameOver] = useState({ won: false, end: false })
   const [alert, setAlert] = useState({ display: false, msg: "" })
   const [loading, setLoading] = useState(false)
+  const [darkMode, setDarkMode] = useState(true)
 
   // Common functions
   const isLastGuessNotCompleted = () => {
@@ -81,7 +82,7 @@ const Wordle = () => {
   const onDeleteKeyClick = () => {
     const letterColPosition = (currentMove % 5) - 1
 
-    /*  Don's allow further type-in:
+    /*  Don's allow delete:
           i) if a row is completed, should not be allow type-in to next row
           ii) Game won - Guess is fully matched with word of the day
           iii) Game over - All six possible guesses are tried 
@@ -182,19 +183,32 @@ const Wordle = () => {
     setAlert({ displasy: false, msg: "" })
   }
 
+  const handleThemeChange = event => {
+    setDarkMode(event.target.checked)
+  }
+
   useKeydownHook(typeInKeyboardKeys)
 
   return (
-    <Page>
+    <Page darkMode={darkMode}>
       <GameWonConfetti gameWon={gameOver?.won} />
-      <WordleHeader loading={loading} />
-      <WordleBoard currentBoardState={currentBoardState} />
+      <WordleHeader
+        loading={loading}
+        darkMode={darkMode}
+        handleThemeChange={handleThemeChange}
+      />
+      <WordleBoard currentBoardState={currentBoardState} darkMode={darkMode} />
       <WordleKeyboard
+        darkMode={darkMode}
         onLetterKeyClick={onLetterKeyClick}
         onEnterKeyClick={onEnterKeyClick}
         onDeleteKeyClick={onDeleteKeyClick}
       />
-      <ToastMessage alert={alert} handleClose={handleClose} />
+      <ToastMessage
+        alert={alert}
+        handleClose={handleClose}
+        darkMode={darkMode}
+      />
     </Page>
   )
 }

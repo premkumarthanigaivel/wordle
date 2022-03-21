@@ -2,7 +2,7 @@ import React from "react"
 import Snackbar from "@mui/material/Snackbar"
 import { ToastContent } from "../styles"
 
-const ToastMessage = ({ alert, handleClose }) => {
+const ToastMessage = ({ alert, handleClose, darkMode }) => {
   return (
     <Snackbar
       open={alert?.display}
@@ -10,7 +10,7 @@ const ToastMessage = ({ alert, handleClose }) => {
       onClose={handleClose}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
-      <ToastContent>
+      <ToastContent darkMode={darkMode}>
         <strong>{alert?.msg}</strong>
       </ToastContent>
     </Snackbar>
