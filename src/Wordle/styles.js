@@ -38,7 +38,8 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-tone-4);
+  border-bottom: 1px solid
+    ${props => (props.darkMode ? "var(--color-tone-4)" : "#d3d6da")};
   width: 100%;
 `
 
@@ -75,17 +76,29 @@ export const Board = styled.div`
   }
 `
 const getSquareBGColor = props => {
-  if (props?.correctPosition) return "var(--color-correct)"
-  else if (props?.wrongPosition) return "var(--color-present)"
-  else if (props?.absent) return "var(--color-absent)"
+  if (props?.correctPosition)
+    return props.darkMode ? "var(--color-correct)" : "#6aaa64"
+  else if (props?.wrongPosition)
+    return props.darkMode ? "var(--color-present)" : "#c9b458"
+  else if (props?.absent)
+    return props.darkMode ? "var(--color-absent)" : "#787c7e"
   return props.darkMode ? "var(--black)" : "white"
 }
 
 const getSquareBorderColor = props => {
-  if (props?.correctPosition) return "var(--color-correct)"
-  else if (props?.wrongPosition) return "var(--color-present)"
-  else if (props?.absent) return "var(--color-absent)"
+  if (props?.correctPosition)
+    return props.darkMode ? "var(--color-correct)" : "#6aaa64"
+  else if (props?.wrongPosition)
+    return props.darkMode ? "var(--color-present)" : "#c9b458"
+  else if (props?.absent)
+    return props.darkMode ? "var(--color-absent)" : "#787c7e"
   return props.darkMode ? "var(--color-tone-4)" : "#d3d6da"
+}
+
+const getSquareFontColor = props => {
+  if (props?.correctPosition || props?.wrongPosition || props?.absent)
+    return "white"
+  return props?.darkMode ? "white" : "black"
 }
 
 export const Square = styled.div`
@@ -94,8 +107,9 @@ export const Square = styled.div`
   font-size: 32px;
   background-color: ${props => getSquareBGColor(props)};
   border: 2px solid ${props => getSquareBorderColor(props)};
-  border-radius: 3px;
-  color: ${props => (props?.darkMode ? "white" : "black")};
+  border-radius: 5px;
+  color: ${props => getSquareFontColor(props)};
+  user-select: none;
   font-weight: 700;
 
   display: flex;

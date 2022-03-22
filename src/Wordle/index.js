@@ -110,6 +110,7 @@ const Wordle = () => {
 
   const onEnterKeyClick = async () => {
     const letterRowPosition = Math.ceil((currentMove - 1) / 5) - 1
+    const letterColPosition = (currentMove % 5) - 1
     let currentRow = currentBoardState[letterRowPosition].slice()
     const fullWord = currentRow.reduce(
       (prev, curr) => prev.concat(curr.text),
@@ -120,7 +121,12 @@ const Wordle = () => {
       return
     }
     // Not 5 letter word
-    else if (fullWord.length < 5) {
+    else if (
+      fullWord.length < 5 ||
+      (letterColPosition === 0 &&
+        letterRowPosition !== 0 &&
+        isLastGuessCompleted())
+    ) {
       setAlert({ display: "true", msg: "Not enough letters" })
       return
     }

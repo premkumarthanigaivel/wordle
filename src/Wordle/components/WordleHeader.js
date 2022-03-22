@@ -5,7 +5,7 @@ import HelpIcon from "@mui/icons-material/Help"
 
 const WordleHeader = ({ loading, darkMode, handleThemeChange }) => {
   return (
-    <Header>
+    <Header darkMode={darkMode}>
       <HelpIcon
         style={{
           marginLeft: "10px",

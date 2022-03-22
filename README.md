@@ -7,14 +7,18 @@ _Component Framework:_ Material UI
 
 ### Features to be developed:
 
-Dark Mode: Square Colors to be lighter
+Color Palette: Light and Dark theme
 Reset Game
+Game state to store in Local storage
 
 ### Known bugs:
 
 If Repeating letters used, showing yellow for both positions
-if no words, Not in the dictionary
 
 ### Unused/Used for Reference:
 
 App.js
+
+### Fixed
+
+if no words, Not in the dictionary
