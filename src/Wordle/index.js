@@ -10,6 +10,7 @@ import WordleBoard from "./components/WordleBoard"
 import WordleKeyboard from "./components/WordleKeyboard"
 import GameWonConfetti from "./components/GameWonConfetti"
 import ToastMessage from "./components/ToastMessage"
+import HowToPlayModal from "./components/HowToPlayModal"
 
 const Wordle = () => {
   const [wordOftheDay] = useState(WORD_OF_THE_DAY[generateRandomNumber()])
@@ -20,6 +21,7 @@ const Wordle = () => {
   const [alert, setAlert] = useState({ display: false, msg: "" })
   const [loading, setLoading] = useState(false)
   const [darkMode, setDarkMode] = useState(true)
+  const [howToDialogShow, setHowToDialogShow] = useState(false)
 
   // Common functions
   const isLastGuessNotCompleted = () => {
@@ -180,6 +182,7 @@ const Wordle = () => {
         onLetterKeyClick(null, keyboardKey?.toUpperCase())
       else if (keyboardKey === "Enter") onEnterKeyClick()
       else if (keyboardKey === "Backspace") onDeleteKeyClick()
+      else if (keyboardKey === "1") setHowToDialogShow(!howToDialogShow)
     },
     [onLetterKeyClick, onEnterKeyClick, onDeleteKeyClick]
   )
@@ -193,6 +196,8 @@ const Wordle = () => {
     setDarkMode(event.target.checked)
   }
 
+  const handleHelpIconClick = () => setHowToDialogShow(true)
+
   useKeydownHook(typeInKeyboardKeys)
 
   return (
@@ -202,6 +207,7 @@ const Wordle = () => {
         loading={loading}
         darkMode={darkMode}
         handleThemeChange={handleThemeChange}
+        handleHelpIconClick={handleHelpIconClick}
       />
       <WordleBoard currentBoardState={currentBoardState} darkMode={darkMode} />
       <WordleKeyboard
@@ -213,6 +219,11 @@ const Wordle = () => {
       <ToastMessage
         alert={alert}
         handleClose={handleClose}
+        darkMode={darkMode}
+      />
+      <HowToPlayModal
+        handleClose={() => setHowToDialogShow(false)}
+        open={howToDialogShow}
         darkMode={darkMode}
       />
     </Page>

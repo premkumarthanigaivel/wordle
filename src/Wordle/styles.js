@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { createGlobalStyle, keyframes, css } from "styled-components"
 import { flipInY, rubberBand } from "react-animations"
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 
 const flipSquareAnimation = keyframes`${flipInY}`
 const RubberBandAnimation = keyframes`${rubberBand}`
@@ -174,4 +175,51 @@ export const ToastContent = styled.div`
   strong {
     font-size: 13px;
   }
+`
+
+export const Flex = styled.div`
+  display: flex;
+  width: 350px;
+  justify-content: space-evenly;
+`
+
+export const Container = styled.div`
+  padding: 10px 20px;
+  background-color:${props => (props?.darkMode ? "#fefefe" : "#5c5c5c")};
+
+  h3 {
+    text-align: center;
+    color: ${props => (props?.darkMode ? "black" : "white")};
+    margin-bottom:20px;
+  }
+
+  p {
+    font-family:'"Clear Sans", "Helvetica Neue"'
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: ${props => (props?.darkMode ? "black" : "white")};
+    line-height: 1.3;
+  }
+  b {
+    display:block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: ${props => (props?.darkMode ? "black" : "white")};
+  }
+  hr{
+    margin-top:10px;
+      margin-bottom:10px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 10px 12px;
+  }
+`
+
+export const CloseIcon = styled(CloseRoundedIcon)`
+  position: absolute;
+  top: 9px;
+  right: 5px;
+  color: ${props => (props?.darkMode ? "black" : "white")};
 `
