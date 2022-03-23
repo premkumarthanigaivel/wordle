@@ -21,7 +21,7 @@ const WordleHeader = ({
         fontSize="medium"
       />
       <Title animation={loading} darkMode={darkMode}>
-        WORDLE
+        Wordle
       </Title>
       <Switch checked={darkMode} onChange={handleThemeChange} />
     </Header>

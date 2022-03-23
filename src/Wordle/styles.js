@@ -45,8 +45,10 @@ export const Header = styled.header`
 `
 
 export const Title = styled.div`
+  font-family: "Kaushan Script", cursive;
+  font-size: 42px;
   color: ${props => (props.darkMode ? "var(--color-tone-7)" : "var(--black)")};
-  font-size: 40px;
+
   font-weight: bolder;
   text-align: center;
   ${props =>
@@ -106,8 +108,30 @@ export const Square = styled.div`
   width: 62px;
   height: 62px;
   font-size: 32px;
+
+  ${props =>
+    props?.gameWon &&
+    css`
+      background: ${props?.wonColor};
+    `}
+
   background-color: ${props => getSquareBGColor(props)};
   border: 2px solid ${props => getSquareBorderColor(props)};
+  ${props =>
+    props?.gameWon &&
+    css`
+      border: 2px solid transparent;
+      border-image: linear-gradient(
+        to bottom right,
+        #b827fc 0%,
+        #2c90fc 25%,
+        #b8fd33 50%,
+        #fec837 75%,
+        #fd1892 100%
+      );
+      border-image-slice: 1;
+    `}
+
   border-radius: 5px;
   color: ${props => getSquareFontColor(props)};
   user-select: none;

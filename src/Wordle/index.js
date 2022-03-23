@@ -1,7 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useCallback } from "react"
 import { Page } from "./styles"
-import { WORD_OF_THE_DAY, GAME_WON_MESSAGES, INIT_BOARD_STATE } from "./config"
+import {
+  WORD_OF_THE_DAY,
+  GAME_WON_MESSAGES,
+  INIT_BOARD_STATE,
+  GAMEWON_LIGHT_COLORS,
+  GAMEWON_DARK_COLORS,
+} from "./config"
 import generateRandomNumber from "./utils/generateRandomNumber"
 import isWordInDictionary from "./utils/isWordInDictionary"
 import useKeydownHook from "./utils/useKeydownHook"
@@ -20,7 +26,7 @@ const Wordle = () => {
   const [gameOver, setGameOver] = useState({ won: false, end: false })
   const [alert, setAlert] = useState({ display: false, msg: "" })
   const [loading, setLoading] = useState(false)
-  const [darkMode, setDarkMode] = useState(true)
+  const [darkMode, setDarkMode] = useState(false)
   const [howToDialogShow, setHowToDialogShow] = useState(false)
 
   // Common functions
@@ -134,10 +140,15 @@ const Wordle = () => {
     }
     // Equal to word of the day
     else if (wordOftheDay === fullWord) {
+      const wonColor = darkMode
+        ? GAMEWON_DARK_COLORS[generateRandomNumber(6)]
+        : GAMEWON_LIGHT_COLORS[generateRandomNumber(6)]
       currentRow = currentRow.map(letter => ({
         ...letter,
         correctPos: true,
         animation: true,
+        gameWon: true,
+        wonColor: wonColor,
       }))
       setAlert({ display: "true", msg: GAME_WON_MESSAGES[letterRowPosition] })
       setGameOver({ won: true, end: false })

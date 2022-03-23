@@ -12,11 +12,13 @@ const WordleBoard = ({ currentBoardState, darkMode }) => {
         return (
           <Square
             darkMode={darkMode}
-            key={`${letter.text}_${idx}`}
-            wrongPosition={letter.wrongPos}
-            correctPosition={letter.correctPos}
-            absent={letter.absent}
-            animation={letter.animation}
+            key={`${letter?.text}_${idx}`}
+            wrongPosition={letter?.wrongPos}
+            correctPosition={letter?.correctPos}
+            absent={letter?.absent}
+            animation={letter?.animation}
+            gameWon={letter?.gameWon}
+            wonColor={letter?.wonColor}
           >
             {letter.text}
           </Square>
