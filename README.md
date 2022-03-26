@@ -13,8 +13,6 @@ Game state to store in Local storage
 
 ### Known bugs:
 
-1. How to play - width issue in mobile
-
 ### Unused/Used for Reference:
 
 App.js

@@ -5,7 +5,8 @@ const GameWonConfetti = ({ gameWon }) => {
   return (
     gameWon && (
       <Confetti
-        numberOfPieces={200}
+        numberOfPieces={300}
+        friction={0.988}
         width={window.innerWidth}
         height={window.innerHeight}
       />

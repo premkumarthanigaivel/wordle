@@ -132,7 +132,7 @@ export const Square = styled.div`
       border-image-slice: 1;
     `}
 
-  border-radius: 5px;
+  border-radius: 2px;
   color: ${props => getSquareFontColor(props)};
   user-select: none;
   font-weight: 700;
@@ -150,8 +150,8 @@ export const Square = styled.div`
       animation: 2s ${flipSquareAnimation};
     `}
   @media (max-width: 600px) {
-    width: 58px;
-    height: 58px;
+    width: ${props => (props.modal ? "48px" : "58px")};
+    height: ${props => (props.modal ? "48px" : "58px")};
   }
 `
 
@@ -205,6 +205,10 @@ export const Flex = styled.div`
   display: flex;
   width: 350px;
   justify-content: space-evenly;
+
+  @media (max-width: 600px) {
+    width: auto;
+  }
 `
 
 export const Container = styled.div`
@@ -242,6 +246,7 @@ export const Container = styled.div`
 `
 
 export const CloseIcon = styled(CloseRoundedIcon)`
+  cursor: pointer;
   position: absolute;
   top: 9px;
   right: 5px;

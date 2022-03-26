@@ -22,33 +22,57 @@ const HowToPlayModal = ({ handleClose, open, darkMode }) => {
         <hr />
         <b>Examples</b>
         <Flex>
-          <Square darkMode={darkMode} correctPosition={true}>
+          <Square modal={true} darkMode={darkMode} correctPosition={true}>
             F
           </Square>
-          <Square darkMode={darkMode}>A</Square>
-          <Square darkMode={darkMode}>I</Square>
-          <Square darkMode={darkMode}>T</Square>
-          <Square darkMode={darkMode}>H</Square>
+          <Square modal={true} darkMode={darkMode}>
+            A
+          </Square>
+          <Square modal={true} darkMode={darkMode}>
+            I
+          </Square>
+          <Square modal={true} darkMode={darkMode}>
+            T
+          </Square>
+          <Square modal={true} darkMode={darkMode}>
+            H
+          </Square>
         </Flex>
         <p>The letter F is in the word and in the correct spot</p>
         <Flex>
-          <Square darkMode={darkMode}>W</Square>
-          <Square darkMode={darkMode} wrongPosition={true}>
+          <Square modal={true} darkMode={darkMode}>
+            W
+          </Square>
+          <Square modal={true} darkMode={darkMode} wrongPosition={true}>
             O
           </Square>
-          <Square darkMode={darkMode}>R</Square>
-          <Square darkMode={darkMode}>T</Square>
-          <Square darkMode={darkMode}>H</Square>
+          <Square modal={true} darkMode={darkMode}>
+            R
+          </Square>
+          <Square modal={true} darkMode={darkMode}>
+            T
+          </Square>
+          <Square modal={true} darkMode={darkMode}>
+            H
+          </Square>
         </Flex>
         <p>The letter O is in the word but in the wrong spot</p>
         <Flex>
-          <Square darkMode={darkMode}>V</Square>
-          <Square darkMode={darkMode}>A</Square>
-          <Square darkMode={darkMode}>L</Square>
-          <Square darkMode={darkMode} absent={true}>
+          <Square modal={true} darkMode={darkMode}>
+            V
+          </Square>
+          <Square modal={true} darkMode={darkMode}>
+            A
+          </Square>
+          <Square modal={true} darkMode={darkMode}>
+            L
+          </Square>
+          <Square modal={true} darkMode={darkMode} absent={true}>
             U
           </Square>
-          <Square darkMode={darkMode}>E</Square>
+          <Square modal={true} darkMode={darkMode}>
+            E
+          </Square>
         </Flex>
         <p>The letter U is not in the word in any spot</p>
         <hr />
