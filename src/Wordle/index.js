@@ -10,6 +10,7 @@ import {
 } from "./config"
 import generateRandomNumber from "./utils/generateRandomNumber"
 import isWordInDictionary from "./utils/isWordInDictionary"
+import getRepeatingLetterCount from "./utils/getRepeatingLetterCount"
 import useKeydownHook from "./utils/useKeydownHook"
 import WordleHeader from "./components/WordleHeader"
 import WordleBoard from "./components/WordleBoard"
@@ -28,7 +29,9 @@ const Wordle = () => {
   const [loading, setLoading] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
   const [howToDialogShow, setHowToDialogShow] = useState(false)
-
+  // const [repeatingLetter, setRepeatingLetter] = useState([])
+  const repeatingLetter = []
+  const matchedLetters = []
   // Common functions
   const isLastGuessNotCompleted = () => {
     const letterRowPosition = Math.ceil(currentMove / 5) - 1
@@ -47,6 +50,9 @@ const Wordle = () => {
       .flat()
     return lastRow.filter(letter => letter === "completed").length === 1
   }
+
+  const isRepeatingLetterInWordle = (letter, repeatedWordleLetters) =>
+    letter.text in repeatedWordleLetters
 
   // Board Operations
   const onLetterKeyClick = (event, keyboardKey) => {
@@ -115,7 +121,6 @@ const Wordle = () => {
     setBoardState(prevBoardState)
     setCurrentMove(prevMove => prevMove - 1)
   }
-
   const onEnterKeyClick = async () => {
     const letterRowPosition = Math.ceil((currentMove - 1) / 5) - 1
     const letterColPosition = (currentMove % 5) - 1
@@ -124,6 +129,9 @@ const Wordle = () => {
       (prev, curr) => prev.concat(curr.text),
       ""
     )
+
+    const repeatingWordOfTheDayLetters = getRepeatingLetterCount(wordOftheDay)
+
     // Game over/won: block enter key
     if (gameOver.won || gameOver.end) {
       return
@@ -157,11 +165,31 @@ const Wordle = () => {
     else if (await isWordInDictionary(fullWord, setLoading)) {
       const WordOfTheDayLetters = wordOftheDay.split("")
       currentRow = currentRow.map((letter, idx) => {
-        if (letter.text === WordOfTheDayLetters[idx])
-          return { ...letter, correctPos: true, animation: true }
-        else if (WordOfTheDayLetters.includes(letter.text))
-          //TODO: repeating letter bug
-          return { ...letter, wrongPos: true, animation: true }
+        // Straight letter-letter match - GREEN
+        if (WordOfTheDayLetters.includes(letter.text)) {
+          if (letter.text === WordOfTheDayLetters[idx]) {
+            matchedLetters.push(letter.text)
+            return { ...letter, correctPos: true, animation: true }
+          } else if (
+            isRepeatingLetterInWordle(letter.text, repeatingWordOfTheDayLetters)
+          ) {
+            // Repeating letter in word of day - YELLOW
+            return { ...letter, wrongPos: true, animation: true }
+          } else if (
+            !isRepeatingLetterInWordle(
+              letter.text,
+              repeatingWordOfTheDayLetters
+            ) &&
+            !repeatingLetter.includes(letter.text) &&
+            !matchedLetters.includes(letter.text)
+          ) {
+            // Repeating letter in typed in word - YELLOW
+            // Should not be matched word, should not be repeating letter
+            repeatingLetter.push(letter.text)
+            return { ...letter, wrongPos: true, animation: true }
+          }
+        }
+
         return { ...letter, absent: true, animation: true }
       })
 
@@ -169,9 +197,7 @@ const Wordle = () => {
         setAlert({ display: "true", msg: wordOftheDay })
         setGameOver({ won: false, end: true })
       }
-    }
-    // Not in online dictionary
-    else {
+    } else {
       setAlert({ display: "true", msg: "Not in the dictionary" })
       return
     }

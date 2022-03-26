@@ -36,12 +36,12 @@ export const GAMEWON_DARK_COLORS = [
 ]
 
 export const GAME_WON_MESSAGES = [
-  "Bullseye 🎯",
-  "You Rock 🔥",
-  "Black magic ✨",
-  "Shining Star 🌟",
-  "Spine Chilling 🥶",
-  "Good Luck 🐥",
+  "Impressive 🥳",
+  "Awesome 🥳",
+  "Brilliant 🥳",
+  "Genius 🥳",
+  "Rockstar 🥳",
+  "Great 🥳",
 ]
 
 //TODO: remove this

@@ -194,7 +194,7 @@ export const Key = styled.div`
 export const ToastContent = styled.div`
   border-radius: 3px;
   padding: 12px;
-  background-color: ${props => (props?.darkMode ? "white" : "#787c7e")};
+  background-color: ${props => (props?.darkMode ? "white" : "#333")};
   color: ${props => (props?.darkMode ? "black" : "white")};
   strong {
     font-size: 13px;
