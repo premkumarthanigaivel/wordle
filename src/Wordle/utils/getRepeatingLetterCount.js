@@ -1,25 +1,15 @@
-const groupLetterByIndex = (prev, curr, idx) => {
+const groupLetterByCount = (prev, curr, idx) => {
   if (curr in prev) {
-    prev[curr] = [...prev[curr], idx]
+    prev[curr] = prev[curr] + 1
     return prev
   }
-  prev[curr] = [idx]
+  prev[curr] = 1
   return prev
 }
 
-const filterMoreThanOneInstances = groupedLetters =>
-  Object.keys(groupedLetters).reduce(
-    (prev, curr) =>
-      groupedLetters[curr].length > 1
-        ? { ...prev, [curr]: groupedLetters[curr] }
-        : prev,
-    {}
-  )
-
 const getRepeatingLetterCount = word => {
-  const groupedLetters = Array.from(word).reduce(groupLetterByIndex, {})
-  const repeatingLetters = filterMoreThanOneInstances(groupedLetters)
-  return repeatingLetters
+  const groupedLetters = Array.from(word).reduce(groupLetterByCount, {})
+  return groupedLetters
 }
 
 export default getRepeatingLetterCount

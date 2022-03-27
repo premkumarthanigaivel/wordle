@@ -27,12 +27,12 @@ export const GAMEWON_LIGHT_COLORS = [
 ]
 
 export const GAMEWON_DARK_COLORS = [
-  "linear-gradient(319deg, #e4ff6d 0%, #ffad42 37%, #e4ff6d 100%)",
-  "linear-gradient(319deg, #f2dd6e 0%, #cff27e 37%, #ef959d 100%)",
-  "linear-gradient(319deg, #f2dd6e 0%, #cff27e 37%, #ef959d 100%)",
-  "linear-gradient(319deg, #91d370 0%, #bca0ff 37%, #f2cd54 100%)",
-  "linear-gradient(319deg, #cdedfd 0%, #ffec82 37%, #ffcfd2 100%)",
   "linear-gradient(319deg, #7fd82b 0%, #ef4063 37%, #e557c6 100%)",
+  "linear-gradient(319deg, #118ab2 0%, #06d6a0 37%, #ffd166 100%)",
+  "linear-gradient(319deg, #ba2d0b 0%, #fe7f2d 37%, #ffbf46 100%)",
+  "linear-gradient(319deg, #91d370 0%, #bca0ff 37%, #f2cd54 100%)",
+  "linear-gradient(315deg, #20bf55 0%, #01baef 74%)",
+  "linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%)",
 ]
 
 export const GAME_WON_MESSAGES = [

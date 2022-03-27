@@ -27,7 +27,7 @@ const Wordle = () => {
   const [gameOver, setGameOver] = useState({ won: false, end: false })
   const [alert, setAlert] = useState({ display: false, msg: "" })
   const [loading, setLoading] = useState(false)
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(true)
   const [howToDialogShow, setHowToDialogShow] = useState(false)
   // const [repeatingLetter, setRepeatingLetter] = useState([])
   const repeatingLetter = []
@@ -125,13 +125,14 @@ const Wordle = () => {
     const letterRowPosition = Math.ceil((currentMove - 1) / 5) - 1
     const letterColPosition = (currentMove % 5) - 1
     let currentRow = currentBoardState[letterRowPosition].slice()
+    console.log("currentRow: ", currentRow)
     const fullWord = currentRow.reduce(
       (prev, curr) => prev.concat(curr.text),
       ""
     )
 
     const repeatingWordOfTheDayLetters = getRepeatingLetterCount(wordOftheDay)
-
+    console.log("repeatingWordOfTheDayLetters: ", repeatingWordOfTheDayLetters)
     // Game over/won: block enter key
     if (gameOver.won || gameOver.end) {
       return
@@ -165,31 +166,27 @@ const Wordle = () => {
     else if (await isWordInDictionary(fullWord, setLoading)) {
       const WordOfTheDayLetters = wordOftheDay.split("")
       currentRow = currentRow.map((letter, idx) => {
-        // Straight letter-letter match - GREEN
-        if (WordOfTheDayLetters.includes(letter.text)) {
-          if (letter.text === WordOfTheDayLetters[idx]) {
-            matchedLetters.push(letter.text)
-            return { ...letter, correctPos: true, animation: true }
-          } else if (
-            isRepeatingLetterInWordle(letter.text, repeatingWordOfTheDayLetters)
-          ) {
-            // Repeating letter in word of day - YELLOW
-            return { ...letter, wrongPos: true, animation: true }
-          } else if (
-            !isRepeatingLetterInWordle(
-              letter.text,
-              repeatingWordOfTheDayLetters
-            ) &&
-            !repeatingLetter.includes(letter.text) &&
-            !matchedLetters.includes(letter.text)
-          ) {
-            // Repeating letter in typed in word - YELLOW
-            // Should not be matched word, should not be repeating letter
+        if (letter.text === WordOfTheDayLetters[idx]) {
+          if (letter.text in matchedLetters)
+            matchedLetters[letter.text] = matchedLetters[letter.text] + 1
+          else matchedLetters[letter.text] = 1
+          return { ...letter, correctPos: true, animation: true }
+        }
+        return letter
+      })
+
+      currentRow = currentRow.map(letter => {
+        if (!letter.correctPos && WordOfTheDayLetters.includes(letter.text)) {
+          if (
+            matchedLetters[letter.text] ===
+            repeatingWordOfTheDayLetters[letter.text]
+          )
+            return { ...letter, absent: true, animation: true }
+          else if (!repeatingLetter.includes(letter.text)) {
             repeatingLetter.push(letter.text)
             return { ...letter, wrongPos: true, animation: true }
           }
         }
-
         return { ...letter, absent: true, animation: true }
       })
 
